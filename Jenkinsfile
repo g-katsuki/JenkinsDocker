@@ -15,8 +15,10 @@ pipeline {
                     def output = docker.image('my-image:latest').run()
                     echo "1111"
                     docker.image('my-image:latest').inside {
-                        sh 'python script.py > output.txt'
+                        // 絶対パスで作業ディレクトリを指定
+                        sh 'cd /path/to/workdir && python script.py > output.txt'
                     }
+
                     echo "2222"
                     docker.image('my-image:latest').withRun { container ->
                         docker.cp("${container.id}:/path/to/output.txt", "output.txt")
