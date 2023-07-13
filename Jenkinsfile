@@ -16,7 +16,7 @@ pipeline {
                     echo "1111"
                     docker.image('my-image:latest').inside {
                         // 絶対パスで作業ディレクトリを指定
-                        sh 'cd /path/to/workdir && python script.py > output.txt'
+                        sh 'cd ${env.WORKSPACE} && python script.py > output.txt'
                     }
 
                     echo "2222"
